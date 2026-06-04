@@ -1,2 +1,0 @@
-# wazftk1
-main
