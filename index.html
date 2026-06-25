@@ -3,68 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وظائف السودان</title>
-    <meta name="keywords" content="وظائف السودان, وظائف للسودانيين, فرص عمل في السودان, توظيف, وظائف خارج السودان للسودانيين, شغل في الخليج للسودانيين, وظائف شاغرة, jobs Sudan, Sudan jobs,شغل لي سودانين,شغل 8 ساعات,شغل ثمانيه ساعات,شغل مقيم في خرطوم,شغل مقيم في امدرمان,شغل بيليل,شغل حراسه,شغل استاز,شغل مهندس,شغل دكتور,شغل, recruitment Sudan">
-    <link rel="icon" type="image/jpeg" href="image/img.jpg">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCSTH4TCZS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HCSTH4TCZS');
-</script>
-    <link rel="stylesheet" href="pages/css/style.css">
+    
+    <!-- ✅ عنوان الصفحة -->
+    <title>وظفتك - منصة التوظيف السودانية | وظائف في السودان 2026</title>
+    
+    <!-- ✅ وصف الموقع (يظهر في نتائج Google) -->
+    <meta name="description" content="وظفتك - أول منصة توظيف رقمية مخصصة للسودانيين. ابحث عن وظائف في الخرطوم، بورتسودان، مدني وجميع ولايات السودان. وظائف حكومية وخاصة للسودانيين داخل السودان وفي المهجر.">
+    
+    <!-- ✅ كلمات مفتاحية -->
+    <meta name="keywords" content="وظائف السودان, وظائف الخرطوم, توظيف سوداني, وظائف خالية السودان, شغل السودان, jobs Sudan, وظائف بورتسودان, وظائف مدني, وظائف حكومية السودان, وظائف شركات السودان, فرص عمل السودان, سوق العمل السوداني, وظائف للسودانيين في الخليج, وظائف سودانية 2026, منصة توظيف السودان, وظفتك, wazftk">
+    
+    <!-- ✅ الكاتب والحقوق -->
+    <meta name="author" content="وظفتك">
+    <meta name="copyright" content="وظفتك 2026">
+    
+    <!-- ✅ لغة الموقع -->
+    <meta http-equiv="content-language" content="ar-SD">
+    
+    <!-- ✅ Open Graph (للشبكات الاجتماعية) -->
+    <meta property="og:title" content="وظفتك - منصة التوظيف السودانية">
+    <meta property="og:description" content="أول منصة توظيف رقمية مخصصة للسودانيين. ابحث عن وظيفتك في السودان الآن!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wazftk.com">
+    <meta property="og:image" content="https://wazftk.com/assets/og-image.png">
+    <meta property="og:locale" content="ar_SD">
+    
+    <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="وظفتك - منصة التوظيف السودانية">
+    <meta name="twitter:description" content="أول منصة توظيف رقمية مخصصة للسودانيين">
+    <meta name="twitter:image" content="https://wazftk.com/assets/og-image.png">
+    
+    <!-- ✅ Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon-towers.png">
+    
+    <!-- ✅ لون شريط العنوان في الجوال -->
+    <meta name="theme-color" content="#1e1b4b">
+    
+    <!-- ✅ CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- ✅ Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCSTH4TCZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HCSTH4TCZS');
+    </script>
 </head>
 <body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+    <img src="assets/logo.svg" alt="وظفتك - منصة التوظيف السودانية" height="45">
+</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">الرئيسية</a>
+                <a href="post-job.html">نشر وظيفة</a>
+                <a href="my-jobs.html">وظائفي</a>
+                <a href="login.html" id="loginBtn">تسجيل الدخول</a>
+                <button id="logoutBtn" class="btn btn-outline" style="display:none;">خروج</button>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
 
-<header>
-    <div class="logo">
-    <img src="image/img.jpg" alt="شعار وظيفتك">
-    <h1>وظيفتك</h1>
-</div>
+    <!-- قسم البطل -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>اعثر على وظيفة أحلامك</h1>
+            <!-- الجديد -->
+<p class="hero-subtitle">
+    <span class="sudan-badge">🇸🇩 للسودانيين فقط</span>
+    أول منصة توظيف رقمية تجمع الشركات السودانية مع الكفاءات السودانية
+    <span class="location-hint">داخل السودان وفي المهجر</span>
+</p>
+            
+            <!-- شريط البحث -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="ابحث عن وظيفة...">
+                <select id="categoryFilter">
+                    <option value="">جميع التصنيفات</option>
+                    <option value="تقنية">تقنية</option>
+                    <option value="تسويق">تسويق</option>
+                    <option value="تصميم">تصميم</option>
+                    <option value="إدارة">إدارة</option>
+                    <option value="مالية">مالية</option>
+                    <option value="طبية">طبية</option>
+                    <option value="تعليم">تعليم</option>
+                    <option value="أخرى">أخرى</option>
+                </select>
+                <button id="searchBtn" class="btn btn-primary">
+                    <i class="fas fa-search"></i> بحث
+                </button>
+            </div>
+        </div>
+    </header>
 
-        <nav>
+    <!-- قسم الوظائف -->
+    <section class="jobs-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>أحدث الوظائف</h2>
+                <div class="stats" id="jobsCount">جاري التحميل...</div>
+            </div>
+            
+            <div id="jobsGrid" class="jobs-grid">
+                <!-- سيتم ملؤها بالجافاسكربت -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i> جاري تحميل الوظائف...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل -->
+<!-- تذييل -->
+<footer class="footer">
+    <div class="container">
+        <!-- الشعار الكبير -->
+        <div class="footer-brand">
+            <img src="assets/footer-logo.svg" alt="وظفتك" class="footer-logo-img">
+            <p class="footer-tagline">نربط المواهب السودانية بالفرص</p>
+        </div>
+        
+        <!-- روابط سريعة -->
+        <div class="footer-links">
             <a href="index.html">الرئيسية</a>
-            <a href="pages/jobs.html">الوظائف</a>
-            <a href="pages/ post-job.html">نشر وظيفة</a>
-            <a href="pages/login.html">دخول</a>
-        </nav>
+            <a href="post-job.html">نشر وظيفة</a>
+            <a href="my-jobs.html">وظائفي</a>
+            <a href="login.html">تسجيل الدخول</a>
+        </div>
+        
+        <!-- حقوق النشر -->
+        <div class="footer-bottom">
+            <p>© 2026 وظفتك - جميع الحقوق محفوظة</p>
+            <p class="footer-sudan">🇸🇩 صنع بفخر في السودان</p>
+        </div>
     </div>
-</header>
+</footer>
 
-<section class="hero">
-    <h2>ابحث عن وظيفة في ولايتك</h2>
-
-    <!-- ✅ تم توحيد الاسم مع JavaScript -->
-    <select id="stateSelect">
-        <option value="">اختر الولاية</option>
-        <option>الخرطوم</option>
-        <option>الجزيرة</option>
-        <option>نهر النيل</option>
-        <option>البحر الأحمر</option>
-        <option>كسلا</option>
-        <option>القضارف</option>
-        <option>سنار</option>
-        <option>النيل الأبيض</option>
-        <option>النيل الأزرق</option>
-        <option>شمال كردفان</option>
-        <option>جنوب كردفان</option>
-        <option>غرب كردفان</option>
-        <option>شمال دارفور</option>
-        <option>جنوب دارفور</option>
-        <option>شرق دارفور</option>
-        <option>غرب دارفور</option>
-        <option>وسط دارفور</option>
-        <option>وسط السودان</option>
-    </select>
-    <button onclick="window.location.href='pages/jobs.html'">
-        عرض الوظائف
-    </button>
-</section>
-<a href="pages/support.html">اتصل بنا</a>
-<script src="pages/js/main.js"></script>
-
+    <script type="module" src="js/jobs.js"></script>
 </body>
 </html>
