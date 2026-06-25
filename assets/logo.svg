@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" width="280" height="70">
+  <defs>
+    <!-- تدرج أخضر سوداني -->
+    <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#009639;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007a2f;stop-opacity:1" />
+    </linearGradient>
+    <!-- تدرج أحمر سوداني -->
+    <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc143c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b01030;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- === الرمز البصري (اليسار) === -->
+  <g transform="translate(10, 5)">
+    <!-- هرم مروي مبسط -->
+    <polygon points="25,5 5,50 45,50" fill="url(#gradGreen)" opacity="0.9"/>
+    <polygon points="25,15 12,45 38,45" fill="#007a2f"/>
+    
+    <!-- باب الهرم -->
+    <rect x="22" y="35" width="6" height="15" fill="#1e1b4b" rx="1"/>
+    
+    <!-- يد تمسك حقيبة (رمز التوظيف) -->
+    <g transform="translate(50, 15)">
+      <!-- الحقيبة -->
+      <rect x="5" y="8" width="24" height="18" rx="3" fill="url(#gradRed)"/>
+      <path d="M12,8 L12,5 Q12,3 14,3 L20,3 Q22,3 22,5 L22,8" 
+            fill="none" stroke="url(#gradRed)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- اليد -->
+      <path d="M0,20 Q5,15 8,18 L8,26 L0,26 Z" fill="#f59e0b"/>
+      <circle cx="3" cy="22" r="2" fill="#ffd700"/>
+    </g>
+    
+    <!-- موجة النيل -->
+    <path d="M5,55 Q15,48 25,55 Q35,62 45,55" 
+          fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M10,58 Q18,52 28,58 Q38,64 48,58" 
+          fill="none" stroke="#818cf8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- === النص (اليمين) === -->
+  <g transform="translate(95, 0)">
+    <!-- اسم الموقع -->
+    <text x="0" y="38" font-family="'Segoe UI', Tahoma, Arial, sans-serif" 
+          font-size="32" font-weight="800" fill="#1e1b4b" letter-spacing="-1">
+      وظفتك
+    </text>
+    
+    <!-- الشعار الفرعي -->
+    <text x="5" y="58" font-family="'Segoe UI', Tahoma, Arial, sans-serif" 
+          font-size="11" font-weight="600" fill="#009639" letter-spacing="2">
+      منصة التوظيف السودانية
+    </text>
+    
+    <!-- خط زخرفي -->
+    <line x1="5" y1="48" x2="80" y2="48" stroke="#dc143c" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- === النقطة الخضراء (إشارة للسودان) === -->
+  <circle cx="270" cy="35" r="4" fill="#009639"/>
+</svg>

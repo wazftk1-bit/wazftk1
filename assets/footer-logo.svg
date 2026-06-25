@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <!-- تدرج أخضر سوداني -->
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#009639"/>
+      <stop offset="100%" style="stop-color:#007a2f"/>
+    </linearGradient>
+    <!-- تدرج أحمر -->
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc143c"/>
+      <stop offset="100%" style="stop-color:#b01030"/>
+    </linearGradient>
+    <!-- تدرج ذهبي -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <!-- ظل ناعم -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- === الرمز البصري الكبير (الوسط) === -->
+  <g transform="translate(160, 10)" filter="url(#shadow)">
+    <!-- هرم مروي كبير -->
+    <polygon points="40,5 5,70 75,70" fill="url(#greenGrad)"/>
+    <polygon points="40,22 18,65 62,65" fill="#007a2f"/>
+    
+    <!-- باب الهرم -->
+    <rect x="35" y="52" width="10" height="18" fill="#1e1b4b" rx="2"/>
+    <rect x="37" y="54" width="6" height="14" fill="#6366f1" rx="1" opacity="0.3"/>
+    
+    <!-- هرم صغير بجانبه -->
+    <polygon points="75,25 55,70 95,70" fill="url(#greenGrad)" opacity="0.7"/>
+    <rect x="72" y="58" width="6" height="12" fill="#1e1b4b" rx="1"/>
+    
+    <!-- حقيبة عمل -->
+    <g transform="translate(85, 30)">
+      <rect x="0" y="8" width="28" height="20" rx="4" fill="url(#redGrad)"/>
+      <path d="M8,8 L8,4 Q8,2 10,2 L18,2 Q20,2 20,4 L20,8" 
+            fill="none" stroke="url(#redGrad)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- قفل الحقيبة -->
+      <circle cx="14" cy="16" r="3" fill="#ffd700"/>
+    </g>
+    
+    <!-- يد تمسك الحقيبة -->
+    <path d="M82,42 Q88,38 92,42 L92,52 L82,52 Z" fill="#f59e0b"/>
+    <circle cx="86" cy="46" r="2.5" fill="#ffd700"/>
+    
+    <!-- موجة النيل -->
+    <path d="M-5,78 Q15,68 35,78 Q55,88 75,78 Q95,68 115,78" 
+          fill="none" stroke="#6366f1" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+    <path d="M0,82 Q18,74 38,82 Q58,90 78,82 Q98,74 118,82" 
+          fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+    
+    <!-- نجوم صغيرة (رمز للتميز) -->
+    <polygon points="15,20 16,23 19,23 17,25 18,28 15,26 12,28 13,25 11,23 14,23" fill="url(#goldGrad)"/>
+    <polygon points="105,15 106,17 108,17 106.5,19 107,21 105,20 103,21 103.5,19 102,17 104,17" fill="url(#goldGrad)"/>
+  </g>
+
+  <!-- === النص الكبير === -->
+  <g transform="translate(200, 95)" text-anchor="middle">
+    <!-- اسم الموقع -->
+    <text x="0" y="0" font-family="'Segoe UI', Tahoma, Arial, sans-serif" 
+          font-size="28" font-weight="900" fill="#ffffff" letter-spacing="2">
+      وظفتك
+    </text>
+    
+    <!-- الشعار الفرعي -->
+    <text x="0" y="18" font-family="'Segoe UI', Tahoma, Arial, sans-serif" 
+          font-size="10" font-weight="600" fill="#f59e0b" letter-spacing="3">
+      منصة التوظيف السودانية
+    </text>
+  </g>
+</svg>

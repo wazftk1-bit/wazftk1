@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وظفتك - منصة التوظيف السودانية</title>
+    
+    <!-- ✅ Favicon - أبراج النيلين -->
+    <link rel="icon" type="image/png" href="assets/favicon-towers-64.png">
+    <link rel="apple-touch-icon" href="assets/favicon-towers.png">
+    
+    <!-- أو أهرامات مروي -->
+    <!-- <link rel="icon" type="image/png" href="assets/favicon-pyramids-64.png"> -->
+    <!-- <link rel="apple-touch-icon" href="assets/favicon-pyramids.png"> -->
+    
+    <!-- لون شريط العنوان في الجوال -->
+    <meta name="theme-color" content="#1e1b4b">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+    <img src="assets/logo.svg" alt="وظفتك - منصة التوظيف السودانية" height="45">
+</a>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="post-job.html" class="active">نشر وظيفة</a>
+                <a href="my-jobs.html">وظائفي</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="form-page">
+        <div class="container">
+            <div class="form-card">
+                <h2><i class="fas fa-plus-circle"></i> نشر وظيفة جديدة</h2>
+                
+                <form id="postJobForm">
+                    <div class="form-group">
+                        <label>عنوان الوظيفة *</label>
+                        <input type="text" id="jobTitle" required placeholder="مثال: مطور واجهات أمامية">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>اسم الشركة *</label>
+                            <input type="text" id="companyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>التصنيف *</label>
+                            <select id="jobCategory" required>
+                                <option value="تقنية">تقنية</option>
+                                <option value="تسويق">تسويق</option>
+                                <option value="تصميم">تصميم</option>
+                                <option value="إدارة">إدارة</option>
+                                <option value="مالية">مالية</option>
+                                <option value="طبية">طبية</option>
+                                <option value="تعليم">تعليم</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نوع الوظيفة *</label>
+                            <select id="jobType" required>
+                                <option value="دوام كامل">دوام كامل</option>
+                                <option value="دوام جزئي">دوام جزئي</option>
+                                <option value="عن بعد">عن بعد</option>
+                                <option value="عقد">عقد</option>
+                                <option value="تدريب">تدريب</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>الموقع *</label>
+                            <input type="text" id="jobLocation" required placeholder="مثال: الرياض، السعودية">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الراتب (اختياري)</label>
+                        <input type="text" id="jobSalary" placeholder="مثال: 8000 - 12000 ريال">
+                    </div>
+
+                    <div class="form-group">
+                        <label>وصف الوظيفة *</label>
+                        <textarea id="jobDescription" rows="5" required 
+                            placeholder="اكتب وصفاً تفصيلياً للوظيفة..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>المتطلبات *</label>
+                        <textarea id="jobRequirements" rows="4" required 
+                            placeholder="اكتب متطلبات الوظيفة (كل متطلب في سطر)..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>طريقة التقديم *</label>
+                        <select id="applyMethod" required>
+                            <option value="email">بريد إلكتروني</option>
+                            <option value="link">رابط خارجي</option>
+                            <option value="phone">هاتف</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="applyDetailsGroup">
+                        <label>تفاصيل التواصل *</label>
+                        <input type="text" id="applyDetails" required 
+                            placeholder="البريد الإلكتروني أو الرابط أو رقم الهاتف">
+                    </div>
+
+                    <div class="form-group">
+                        <label>شعار الشركة (رابط صورة - اختياري)</label>
+                        <input type="url" id="companyLogo" placeholder="https://...">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> نشر الوظيفة
+                    </button>
+                </form>
+
+                <div id="successMessage" class="success-message" style="display:none;">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>تم نشر الوظيفة بنجاح!</h3>
+                    <a href="index.html" class="btn btn-primary">عرض الوظائف</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { auth } from './js/firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // التحقق من تسجيل الدخول
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'login.html?redirect=post-job.html';
+            }
+        });
+
+        document.getElementById('postJobForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري النشر...';
+            btn.disabled = true;
+
+            try {
+                const jobData = {
+                    title: document.getElementById('jobTitle').value,
+                    company: document.getElementById('companyName').value,
+                    category: document.getElementById('jobCategory').value,
+                    type: document.getElementById('jobType').value,
+                    location: document.getElementById('jobLocation').value,
+                    salary: document.getElementById('jobSalary').value || 'غير محدد',
+                    description: document.getElementById('jobDescription').value,
+                    requirements: document.getElementById('jobRequirements').value.split('\n').filter(r => r.trim()),
+                    applyMethod: document.getElementById('applyMethod').value,
+                    applyDetails: document.getElementById('applyDetails').value,
+                    logo: document.getElementById('companyLogo').value || '',
+                    postedBy: user.uid,
+                    postedByEmail: user.email,
+                    createdAt: serverTimestamp(),
+                    views: 0
+                };
+
+                await addDoc(collection(db, 'jobs'), jobData);
+                
+                document.getElementById('postJobForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                
+            } catch (error) {
+                console.error(error);
+                alert('حدث خطأ: ' + error.message);
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> نشر الوظيفة';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

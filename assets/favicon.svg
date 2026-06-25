@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- خلفية دائرية -->
+  <circle cx="32" cy="32" r="30" fill="#1e1b4b"/>
+  
+  <!-- أهرامات مروي السودانية -->
+  <!-- الهرم الكبير (الأيسر) -->
+  <polygon points="18,10 6,46 30,46" fill="#c4935e"/>
+  <polygon points="18,18 10,42 26,42" fill="#a67c52"/>
+  <!-- باب الهرم -->
+  <rect x="15" y="34" width="6" height="12" fill="#1e1b4b" rx="1"/>
+  
+  <!-- الهرم الصغير (الأيمن) -->
+  <polygon points="36,18 28,46 44,46" fill="#c4935e"/>
+  <polygon points="36,24 30,42 42,42" fill="#a67c52"/>
+  <!-- باب الهرم -->
+  <rect x="34" y="36" width="4" height="10" fill="#1e1b4b" rx="1"/>
+  
+  <!-- حقيبة عمل -->
+  <g transform="translate(42, 26)">
+    <rect x="0" y="6" width="16" height="12" rx="2" fill="#dc143c"/>
+    <path d="M4,6 L4,4 Q4,3 5,3 L11,3 Q12,3 12,4 L12,6" 
+          fill="none" stroke="#dc143c" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- قفل -->
+    <circle cx="8" cy="11" r="2" fill="#f59e0b"/>
+  </g>
+  
+  <!-- شمس صغيرة -->
+  <circle cx="52" cy="14" r="4" fill="#f59e0b" opacity="0.8"/>
+  
+  <!-- نجمة -->
+  <polygon points="56,8 56.5,9.5 58,9.5 57,10.5 57.5,12 56,11 54.5,12 55,10.5 54,9.5 55.5,9.5" 
+           fill="#009639"/>
+</svg>

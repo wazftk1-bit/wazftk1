@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وظفتك - منصة التوظيف السودانية</title>
+    
+    <!-- ✅ Favicon - أبراج النيلين -->
+    <link rel="icon" type="image/png" href="assets/favicon-towers-64.png">
+    <link rel="apple-touch-icon" href="assets/favicon-towers.png">
+    
+    <!-- أو أهرامات مروي -->
+    <!-- <link rel="icon" type="image/png" href="assets/favicon-pyramids-64.png"> -->
+    <!-- <link rel="apple-touch-icon" href="assets/favicon-pyramids.png"> -->
+    
+    <!-- لون شريط العنوان في الجوال -->
+    <meta name="theme-color" content="#1e1b4b">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+    <img src="assets/logo.svg" alt="وظفتك - منصة التوظيف السودانية" height="45">
+</a>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="post-job.html">نشر وظيفة</a>
+                <a href="my-jobs.html" class="active">وظائفي</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-page">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2><i class="fas fa-briefcase"></i> وظائفي المنشورة</h2>
+                <a href="post-job.html" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> وظيفة جديدة
+                </a>
+            </div>
+
+            <div id="myJobsList">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- تذييل -->
+<footer class="footer">
+    <div class="container">
+        <!-- الشعار الكبير -->
+        <div class="footer-brand">
+            <img src="assets/footer-logo.svg" alt="وظفتك" class="footer-logo-img">
+            <p class="footer-tagline">نربط المواهب السودانية بالفرص</p>
+        </div>
+        
+        <!-- روابط سريعة -->
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="post-job.html">نشر وظيفة</a>
+            <a href="my-jobs.html">وظائفي</a>
+            <a href="login.html">تسجيل الدخول</a>
+        </div>
+        
+        <!-- حقوق النشر -->
+        <div class="footer-bottom">
+            <p>© 2026 وظفتك - جميع الحقوق محفوظة</p>
+            <p class="footer-sudan">🇸🇩 صنع بفخر في السودان</p>
+        </div>
+    </div>
+</footer>
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { auth } from './js/firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { collection, query, where, getDocs, deleteDoc, doc, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = 'login.html?redirect=my-jobs.html';
+                return;
+            }
+
+            const myJobsList = document.getElementById('myJobsList');
+
+            try {
+                // ✅ محاولة الاستعلام مع الترتيب (يحتاج فهرس)
+                let snapshot;
+                try {
+                    const q = query(
+                        collection(db, 'jobs'), 
+                        where('postedBy', '==', user.uid),
+                        orderBy('createdAt', 'desc')
+                    );
+                    snapshot = await getDocs(q);
+                } catch (indexError) {
+                    // ⚠️ إذا فشل الفهرس، نستخدم استعلام بسيط ونرتب يدوياً
+                    console.warn('الفهرس غير موجود، جاري الاستعلام البديل...');
+                    
+                    const q = query(
+                        collection(db, 'jobs'), 
+                        where('postedBy', '==', user.uid)
+                    );
+                    snapshot = await getDocs(q);
+                }
+
+                if (snapshot.empty) {
+                    myJobsList.innerHTML = `
+                        <div class="empty-state" style="text-align:center; padding:60px;">
+                            <i class="fas fa-folder-open" style="font-size:4rem; color:#cbd5e1; margin-bottom:20px; display:block;"></i>
+                            <h3 style="color:#1e1b4b; margin-bottom:10px;">لا توجد وظائف منشورة</h3>
+                            <p style="color:#64748b; margin-bottom:20px;">ابدأ بنشر أول وظيفة الآن!</p>
+                            <a href="post-job.html" class="btn btn-primary">نشر وظيفة</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // ترتيب الوظائف يدوياً (أحدث أولاً)
+                let jobs = [];
+                snapshot.forEach(docSnap => {
+                    jobs.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                
+                jobs.sort((a, b) => {
+                    if (!a.createdAt) return 1;
+                    if (!b.createdAt) return -1;
+                    return b.createdAt.toMillis() - a.createdAt.toMillis();
+                });
+
+                let html = '<div class="jobs-table" style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);">';
+                
+                jobs.forEach(job => {
+                    const date = job.createdAt 
+                        ? job.createdAt.toDate().toLocaleDateString('ar-SA') 
+                        : 'حديثاً';
+                    
+                    html += `
+                        <div class="job-row" data-id="${job.id}" style="display:flex; justify-content:space-between; align-items:center; padding:20px 25px; border-bottom:1px solid #f1f5f9;">
+                            <div class="job-info">
+                                <h4 style="color:#1e1b4b; margin-bottom:4px;">${job.title || 'بدون عنوان'}</h4>
+                                <span style="color:#64748b; font-size:0.9rem;">${job.company || 'شركة غير معروفة'}</span>
+                            </div>
+                            <div class="job-stats" style="display:flex; gap:20px; color:#64748b; font-size:0.9rem;">
+                                <span><i class="fas fa-eye" style="color:#6366f1;"></i> ${job.views || 0}</span>
+                                <span class="date">${date}</span>
+                            </div>
+                            <div class="job-actions" style="display:flex; gap:10px;">
+                                <a href="job-details.html?id=${job.id}" class="btn btn-sm btn-outline">
+                                    <i class="fas fa-eye"></i> عرض
+                                </a>
+                                <button class="btn btn-sm btn-danger delete-btn" data-id="${job.id}">
+                                    <i class="fas fa-trash"></i> حذف
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                myJobsList.innerHTML = html;
+
+                // إضافة أحداث الحذف
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        if (!confirm('هل أنت متأكد من حذف هذه الوظيفة؟')) return;
+                        
+                        const id = e.currentTarget.dataset.id;
+                        try {
+                            await deleteDoc(doc(db, 'jobs', id));
+                            e.currentTarget.closest('.job-row').remove();
+                            
+                            // إذا لم يتبقَ وظائف، أظهر رسالة فارغة
+                            if (document.querySelectorAll('.job-row').length === 0) {
+                                myJobsList.innerHTML = `
+                                    <div class="empty-state" style="text-align:center; padding:60px;">
+                                        <i class="fas fa-folder-open" style="font-size:4rem; color:#cbd5e1; margin-bottom:20px; display:block;"></i>
+                                        <h3 style="color:#1e1b4b; margin-bottom:10px;">لا توجد وظائف منشورة</h3>
+                                        <a href="post-job.html" class="btn btn-primary">نشر وظيفة</a>
+                                    </div>
+                                `;
+                            }
+                        } catch (err) {
+                            alert('حدث خطأ في الحذف: ' + err.message);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error('خطأ:', error);
+                
+                let errorMsg = 'حدث خطأ في التحميل';
+                let fixHint = '';
+                
+                if (error.message && error.message.includes('index')) {
+                    errorMsg = 'يلزم إنشاء فهرس في Firestore';
+                    fixHint = 'اذهب إلى Firebase Console ← Firestore Database ← Indexes ← Composite ← أضف فهرس لـ postedBy + createdAt';
+                } else if (error.code === 'permission-denied') {
+                    errorMsg = 'خطأ في صلاحيات الوصول';
+                }
+
+                myJobsList.innerHTML = `
+                    <div class="error-message" style="text-align:center; padding:60px;">
+                        <i class="fas fa-exclamation-circle" style="font-size:3rem; color:#ef4444; margin-bottom:15px; display:block;"></i>
+                        <h3 style="color:#1e1b4b; margin-bottom:10px;">${errorMsg}</h3>
+                        ${fixHint ? `<p style="color:#64748b; margin-bottom:20px; background:#fef3c7; padding:15px; border-radius:8px;">${fixHint}</p>` : ''}
+                        <button onclick="location.reload()" class="btn btn-primary">
+                            <i class="fas fa-redo"></i> إعادة المحاولة
+                        </button>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
